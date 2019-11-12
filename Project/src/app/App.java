@@ -11,14 +11,16 @@ public class App {
         // Person p = new Person("Manager Singh", "manager", "manager123",
         // "manager@gmail.com");
         // User u = new User();
+        // short choiceOne = 0;
+        // short choiceTwo = 0;
+
+        // Game Execution Experiment
         System.out.println("--WELCOME TO TRIVIA GAME--");
         System.out.println("__________________________");
         Game game = new Game();
-        game.createData();
-        // short choiceOne = 0;
-        // short choiceTwo = 0;
-        game.startGame();
-        // Game Execution Experiment
+        // game.createData();
+        // System.out.println(game.selectCategory());
+        game.ReadyQuiz();
 
         // GameData Example
         // gd.createData();
