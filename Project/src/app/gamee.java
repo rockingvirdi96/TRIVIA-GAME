@@ -1,14 +1,18 @@
 package app;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
- * Game
+ * gamee
  */
-public class Game extends GameData {
+public class gamee extends GameData {
     private ArrayList<String> questions = new ArrayList<>();
     private ArrayList<String> answers = new ArrayList<>();
+
+    public gamee() {
+
+    }
 
     // Welcome to the Game.
     public short selectCategory() {
@@ -66,4 +70,5 @@ public class Game extends GameData {
         }
     }
 
+    
 }
