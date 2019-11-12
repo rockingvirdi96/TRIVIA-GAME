@@ -6,18 +6,23 @@ import java.util.ArrayList;
 /**
  * gamee
  */
-public class gamee extends GameData {
-    private ArrayList<String> questions = new ArrayList<>();
-    private ArrayList<String> answers = new ArrayList<>();
+public class Game extends GameData {
+    private ArrayList<String> questions = new ArrayList<String>();
+    private ArrayList<String> answers = new ArrayList<String>();
+    short choiceOne = 0;
 
-    public gamee() {
+    public ArrayList<String> getQuestions() {
+        return this.questions;
+    }
 
+    public ArrayList<String> getAnswers() {
+        return this.answers;
     }
 
     // Welcome to the Game.
     public short selectCategory() {
+        createData();
         boolean trial = true;
-        short choiceOne = 0;
         while (trial) {
             Scanner input = new Scanner(System.in);
             short index = 0;
@@ -38,22 +43,22 @@ public class gamee extends GameData {
                 trial = true;
             }
         }
+        this.eraseData();
         return choiceOne;
     }
 
     public void DivideQuestionAndAnswers(ArrayList<String> list) {
         for (int i = 0; i < list.size(); i++) {
-            for (String x : list) {
-                if (i % 2 == 0) {
-                    this.answers.add(x);
-                } else {
-                    this.questions.add(x);
-                }
+            if (i % 2 == 0) {
+                this.questions.add(list.get(i));
+            } else {
+                this.answers.add(list.get(i));
             }
         }
     }
 
-    public void ReadyQuiz(this.selectCategory()) {
+    public void ReadyQuiz(short choice) {
+
         this.answers.clear();
         this.questions.clear();
         if (choice == 1) {
@@ -70,5 +75,4 @@ public class gamee extends GameData {
         }
     }
 
-    
 }

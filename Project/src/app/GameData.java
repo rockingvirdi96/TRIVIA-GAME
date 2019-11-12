@@ -69,4 +69,10 @@ public class GameData {
         }
     }
 
+    public void eraseData() {
+        this.Categories.clear();
+        this.Countries.clear();
+        this.IceBreakers.clear();
+        this.Movies.clear();
+    }
 }

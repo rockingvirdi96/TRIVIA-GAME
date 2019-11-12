@@ -18,10 +18,10 @@ public class App {
         System.out.println("--WELCOME TO TRIVIA GAME--");
         System.out.println("__________________________");
         Game game = new Game();
-        // game.createData();
-        // System.out.println(game.selectCategory());
-        game.ReadyQuiz();
-
+        game.ReadyQuiz(game.selectCategory());
+        for (String x : game.getQuestions()) {
+            System.out.println(x);
+        }
         // GameData Example
         // gd.createData();
         // System.out.println(gd.getCategories() + "\n");
