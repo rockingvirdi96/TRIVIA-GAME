@@ -2,6 +2,8 @@ package app;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
+import java.math.*;
 
 /**
  * gamee
@@ -75,4 +77,18 @@ public class Game extends GameData {
         }
     }
 
+    public void DisplayQuestion() {
+        short x = 0;
+        for (String question : this.questions) {
+            System.out.println("\n" + (x + 1) + question + "\n");
+            x++;
+            for (int i = 0; i < 4; i++) {
+                int random = (int) ((Math.random() * 10) - 1);
+                if (random < 0) {
+                    random *= -1;
+                }
+                System.out.println(i + 1 + this.answers.get(random));
+            }
+        }
+    }
 }

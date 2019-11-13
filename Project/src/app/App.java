@@ -14,14 +14,20 @@ public class App {
         // short choiceOne = 0;
         // short choiceTwo = 0;
 
+        System.out.println("-- WELCOME TO TRIVIA --");
+        System.out.println("=======================");
+
         // Game Execution Experiment
-        System.out.println("--WELCOME TO TRIVIA GAME--");
-        System.out.println("__________________________");
         Game game = new Game();
         game.ReadyQuiz(game.selectCategory());
-        for (String x : game.getQuestions()) {
-            System.out.println(x);
-        }
+        // for (String y : game.getAnswers()) {
+        // System.out.println(y);
+        // }
+        // for (String x : game.getQuestions()) {
+        // System.out.println(x);
+        // }
+        game.DisplayQuestion();
+
         // GameData Example
         // gd.createData();
         // System.out.println(gd.getCategories() + "\n");
