@@ -2,8 +2,7 @@ package app;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Random;
-import java.math.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * gamee
@@ -11,7 +10,9 @@ import java.math.*;
 public class Game extends GameData {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
+    // private ArrayList<String> options = new ArrayList<String>();
     short choiceOne = 0;
+    boolean trial = true;
 
     public ArrayList<String> getQuestions() {
         return this.questions;
@@ -29,7 +30,7 @@ public class Game extends GameData {
             Scanner input = new Scanner(System.in);
             short index = 0;
             trial = false;
-            System.out.println("Select the Category for the Questions.");
+            System.out.println("\nSelect the Category for the Quiz:-");
             for (String x : getCategories()) {
                 System.out.println((index + 1) + "." + x);
                 index++;
@@ -77,18 +78,59 @@ public class Game extends GameData {
         }
     }
 
-    public void DisplayQuestion() {
-        short x = 0;
-        for (String question : this.questions) {
-            System.out.println("\n" + (x + 1) + question + "\n");
-            x++;
-            for (int i = 0; i < 4; i++) {
-                int random = (int) ((Math.random() * 10) - 1);
-                if (random < 0) {
-                    random *= -1;
+    public void PlayQuestion() {
+
+        for (int i = 0; i < this.questions.size(); i++) {
+            String currentQuestion = this.questions.get(i);
+            String answer = this.answers.get(i);
+            short UserAnswer = 0;
+            ArrayList<String> options = new ArrayList<String>();
+            System.out.println((i + 1) + ". " + currentQuestion);
+            while (options.size() != 4) {
+                int random = ThreadLocalRandom.current().nextInt(0, 10);
+
+                if (!options.contains(this.answers.get(random)) && (this.answers.get(random) != answer)) {
+                    options.add(this.answers.get(random));
                 }
-                System.out.println(i + 1 + this.answers.get(random));
             }
+
+            int random = ThreadLocalRandom.current().nextInt(0, 4);
+            System.out.println(random);
+            options.set(random, answer);
+            for (String opt : options) {
+                System.out.println("-- " + opt);
+            }
+            Scanner input = new Scanner(System.in);
+            while (trial) {
+                Scanner inputt = new Scanner(System.in);
+                System.out.print("Enter the correct answer(1-4):");
+                UserAnswer = inputt.nextShort();
+                if (UserAnswer < 1 || UserAnswer > 4) {
+                    trial = true;
+                } else {
+                    trial = false;
+                }
+            }
+            if (UserAnswer == (random + 1)) {
+                System.out.println("Correct Answer");
+            } else {
+                System.out.println("Wrong Answer");
+            }
+
         }
+
     }
 }
+
+// short x = 0;
+// for (String question :questions) {
+// System.out.println("\n" + (x + 1) + ". " + question + "\n");
+// x++;
+// for (int i = 0; i < 4; i++) {
+// int random = (int) ((Math.random() * 10) - 1);
+// if (random < 0) {
+// random *= -1;
+// }
+// System.out.println((i + 1) + ". " + this.answers.get(random));
+// }
+// }
