@@ -63,7 +63,7 @@ public class Person {
         }
         for (var x = 0; x < usernames.size(); x++) {
             if (this.usernames.get(x).equals(usernameTemp) && this.passwords.get(x).equals(passTemp)) {
-                System.out.print("Logged In\n");
+                System.out.print("Welcome " + names.get(x));
                 return;
             }
         }

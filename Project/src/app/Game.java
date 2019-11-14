@@ -10,6 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Game extends GameData {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
+    User u = new User();
     // private ArrayList<String> options = new ArrayList<String>();
     short choiceOne = 0;
     boolean trial = true;
@@ -101,10 +102,10 @@ public class Game extends GameData {
                 System.out.println("-- " + opt);
             }
             Scanner input = new Scanner(System.in);
+            trial = true;
             while (trial) {
-                Scanner inputt = new Scanner(System.in);
                 System.out.print("Enter the correct answer(1-4):");
-                UserAnswer = inputt.nextShort();
+                UserAnswer = input.nextShort();
                 if (UserAnswer < 1 || UserAnswer > 4) {
                     trial = true;
                 } else {
@@ -113,6 +114,8 @@ public class Game extends GameData {
             }
             if (UserAnswer == (random + 1)) {
                 System.out.println("Correct Answer");
+                u.setTimesPlayed();
+
             } else {
                 System.out.println("Wrong Answer");
             }
@@ -121,16 +124,3 @@ public class Game extends GameData {
 
     }
 }
-
-// short x = 0;
-// for (String question :questions) {
-// System.out.println("\n" + (x + 1) + ". " + question + "\n");
-// x++;
-// for (int i = 0; i < 4; i++) {
-// int random = (int) ((Math.random() * 10) - 1);
-// if (random < 0) {
-// random *= -1;
-// }
-// System.out.println((i + 1) + ". " + this.answers.get(random));
-// }
-// }

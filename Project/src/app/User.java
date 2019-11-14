@@ -9,16 +9,16 @@ package app;
  */
 public class User extends Person {
     private short timesPlayed = 0;
-    private short timesWon = 0;
-    private String favCategory = "";
-    // private short timesLost = timesPlayed - timesWon;
+    private short correctAnswer = 0;
+    // private String favCategory = "";
+    // private short timesLost = timesPlayed - correctAnswer;
 
-    public short getTimesWon() {
-        return timesWon;
+    public short getcorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setTimesWon(short timesWon) {
-        this.timesWon = timesWon;
+    public void setcorrectAnswer(short correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 
     public short getTimesPlayed() {
@@ -29,7 +29,3 @@ public class User extends Person {
         this.timesPlayed = timesPlayed;
     }
 }
-
-
-
-    
