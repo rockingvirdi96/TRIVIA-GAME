@@ -10,8 +10,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Game extends GameData {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
-    User u = new User();
-    // private ArrayList<String> options = new ArrayList<String>();
     short choiceOne = 0;
     boolean trial = true;
 
@@ -61,7 +59,7 @@ public class Game extends GameData {
         }
     }
 
-    public void ReadyQuiz(short choice) {
+    public void DivideQandA(short choice) {
 
         this.answers.clear();
         this.questions.clear();
@@ -85,7 +83,9 @@ public class Game extends GameData {
             String currentQuestion = this.questions.get(i);
             String answer = this.answers.get(i);
             short UserAnswer = 0;
+            User u = new User();
             ArrayList<String> options = new ArrayList<String>();
+
             System.out.println((i + 1) + ". " + currentQuestion);
             while (options.size() != 4) {
                 int random = ThreadLocalRandom.current().nextInt(0, 10);
@@ -101,26 +101,32 @@ public class Game extends GameData {
             for (String opt : options) {
                 System.out.println("-- " + opt);
             }
-            Scanner input = new Scanner(System.in);
             trial = true;
             while (trial) {
-                System.out.print("Enter the correct answer(1-4):");
-                UserAnswer = input.nextShort();
-                if (UserAnswer < 1 || UserAnswer > 4) {
+                Scanner input = new Scanner(System.in);
+                try {
+                    System.out.print("Enter the correct answer(1-4):");
+                    UserAnswer = input.nextShort();
+                    if (UserAnswer < 1 || UserAnswer > 4) {
+                        System.out.println("Invalid input.");
+                        trial = true;
+                    } else {
+                        trial = false;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input.");
                     trial = true;
-                } else {
-                    trial = false;
                 }
             }
             if (UserAnswer == (random + 1)) {
                 System.out.println("Correct Answer");
-                u.setTimesPlayed();
-
+                u.IncrementCorrectAnswer();
             } else {
                 System.out.println("Wrong Answer");
             }
 
         }
+        this.eraseData();
 
     }
 }

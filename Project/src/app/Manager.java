@@ -1,29 +1,21 @@
 package app;
 
 import java.util.Scanner;
-
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * User
  */
-public class Person {
+public class Manager {
 
     private ArrayList<String> names = new ArrayList<>();
     private ArrayList<String> usernames = new ArrayList<>();
     private ArrayList<String> passwords = new ArrayList<>();
     private ArrayList<String> email = new ArrayList<>();
-
-    public Person() {
-
-    }
-
-    public Person(String name, String username, String password, String email) {
-        this.names.add(name);
-        this.usernames.add(username);
-        this.passwords.add(password);
-        this.email.add(email);
-    }
+    private String specialCode;
+    Game game = new Game();
+    GameData gd = new GameData();
 
     public void Register() {
         boolean trial = false;
@@ -51,6 +43,14 @@ public class Person {
         System.out.println("SUCCESS! You are registered.");
     }
 
+    public String getSpecialCode() {
+        return specialCode;
+    }
+
+    public void setSpecialCode(String specialCode) {
+        this.specialCode = specialCode;
+    }
+
     public void Login() {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter your username :");
@@ -67,18 +67,63 @@ public class Person {
                 return;
             }
         }
-        System.out.println("Information provided is not correct\nPress enter to try again.");
+        System.out.println(
+                "Information provided is not correct\nPress enter to try again or any key to go to main menu.");
         input = new Scanner(System.in);
         if (input.nextLine().equals("")) {
             Login();
+        } else {
+            Register();
         }
     }
 
-    public void DisplayAllUsers() {
-        System.out.println(this.names);
-        System.out.println(this.usernames);
-        System.out.println(this.passwords);
-        System.out.println(this.email);
+    public void function(ArrayList x) throws IOException {
+        Scanner input;
+        input = new Scanner(System.in);
+        for (short i = 0; i < x.size(); i++) {
+            System.out.println(x.get(i));
+        }
+        System.out.print("Select which question you wish to edit.");
+        short qNo = input.nextShort();
+        input = new Scanner(System.in);
+        System.out.println("Enter the new question you want to replace it.");
+        String newQuestion = input.nextLine();
+        System.out.println((String) x.get(qNo - 1));
+        System.out.println("---" + newQuestion
+                + "\n this is what your new question will look like.\n Enter Y to save or N to edit.");
+        input = new Scanner(System.in);
+        char choix = input.nextLine().charAt(0);
+        if (choix == 'Y') {
+            gd.modifyData((String) x.get(qNo - 1), newQuestion);
+            return;
+        } else {
+            editQuestion();
+        }
+    }
+
+    public void editQuestion() throws IOException {
+        GameData gd = new GameData();
+        gd.createData();
+        short choice = game.selectCategory();
+        game.DivideQandA(choice);
+        switch (choice) {
+        case 1: {
+            function(game.getQuestions());
+            break;
+        }
+        case 2: {
+            function(game.getQuestions());
+            break;
+        }
+        case 3: {
+            function(game.getQuestions());
+            break;
+        }
+        }
+
+    }
+
+    public void addNewCategory() {
 
     }
 

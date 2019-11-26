@@ -7,7 +7,7 @@ package app;
 /**
  * User
  */
-public class User extends Person {
+public class User extends Manager {
     private short timesPlayed = 0;
     private short correctAnswer = 0;
     // private String favCategory = "";
@@ -17,15 +17,20 @@ public class User extends Person {
         return correctAnswer;
     }
 
-    public void setcorrectAnswer(short correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void IncrementCorrectAnswer() {
+        this.correctAnswer += 1;
     }
 
     public short getTimesPlayed() {
         return timesPlayed;
     }
 
-    public void setTimesPlayed(short timesPlayed) {
-        this.timesPlayed = timesPlayed;
+    public void IncrementTimesPlayed() {
+        this.timesPlayed += 1;
+    }
+
+    public void DisplayResults() {
+        System.out.println("Total time played :" + this.timesPlayed);
+        System.out.println("Total Correct Answers :" + this.correctAnswer);
     }
 }

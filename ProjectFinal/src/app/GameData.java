@@ -1,14 +1,7 @@
 package app;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -21,9 +14,6 @@ public class GameData {
     private ArrayList<String> IceBreakers = new ArrayList<String>();
     private ArrayList<String> Countries = new ArrayList<String>();
     private ArrayList<String> Movies = new ArrayList<String>();
-    private ArrayList<String> GameData = new ArrayList<String>();
-    // ArrayList<String> lines = new ArrayList<String>();
-    // String line = null;
 
     public ArrayList<String> getCategories() {
         return this.Categories;
@@ -41,9 +31,8 @@ public class GameData {
         return this.Movies;
     }
 
-    // D:\\Sem_Troisieme\\JAVA\\Projects\\Project\\src\\app\\dataFile.txt
     public void createData() {
-        File file = new File("D:\\Sem_Troisieme\\JAVA\\TRIVIA-GAME\\Project\\src\\app\\dataFile.txt  ");
+        File file = new File("D:\\Sem_Troisieme\\JAVA\\Projects\\Project\\src\\app\\dataFile.txt");
         try {
             short i = 0;
             Scanner reader = new Scanner(file);
@@ -78,21 +67,6 @@ public class GameData {
         } catch (FileNotFoundException e) {
             System.out.println("File Not Found.");
         }
-    }
-
-    public void modifyData(String oldLine, String newLine) throws IOException {
-        String filePath = "D:\\Sem_Troisieme\\JAVA\\TRIVIA-GAME\\Project\\src\\app\\dataFile.txt";
-        Scanner sc = new Scanner(new File(filePath));
-        StringBuffer buffer = new StringBuffer();
-        while (sc.hasNextLine()) {
-            buffer.append(sc.nextLine() + System.lineSeparator());
-        }
-        String fileContents = buffer.toString();
-        sc.close();
-        fileContents = fileContents.replaceAll(oldLine, newLine);
-        FileWriter writer = new FileWriter(filePath);
-        writer.append(fileContents);
-        writer.flush();
     }
 
     public void eraseData() {
