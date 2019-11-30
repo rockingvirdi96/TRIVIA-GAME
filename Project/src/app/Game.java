@@ -26,6 +26,7 @@ public class Game extends GameData {
     }
 
     public short selectCategory(GameData gd) throws IOException {
+        gd.updateData();
         boolean trial = true;
         while (trial) {
             Scanner input = new Scanner(System.in);
@@ -85,7 +86,7 @@ public class Game extends GameData {
 
     public void DivideQandA(GameData gd) throws IOException {
         this.clearData();
-        this.updateData();
+        gd.updateData();
         String answer = "";
         String question = "";
         short choice = this.selectCategory();
@@ -124,9 +125,7 @@ public class Game extends GameData {
                     options.add(this.answers.get(random));
                 }
             }
-
             int random = ThreadLocalRandom.current().nextInt(0, 4);
-            System.out.println(random);
             options.set(random, answer);
             for (String opt : options) {
                 System.out.println("-- " + opt);
@@ -157,8 +156,6 @@ public class Game extends GameData {
             result = u.getcorrectAnswer();
         }
         System.out.println("Final Score: " + result / 10 * 100 + "%");
-
-        this.eraseData();
 
     }
 }

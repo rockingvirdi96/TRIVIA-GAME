@@ -93,6 +93,7 @@ public class App {
                     if (choiceTwo == 2) {
                         trial = true;
                         do {
+                            gd.updateData();
                             game.DivideQandA(gd);
                             game.PlayQuestion(u);
                             u.IncrementTimesPlayed();
@@ -118,7 +119,6 @@ public class App {
                 System.out.println("Something Went Wrong");
                 trial = true;
             }
-
         }
 
     }
