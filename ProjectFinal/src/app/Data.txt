@@ -1,12 +1,9 @@
-Ice Breakers
-Country
-Movie 
-
+catIceBreaker
 Who was the legendary Benedictine monk who invented champagne?
 Dom Perignon
 Name the largest freshwater lake in the world?
 Lake Superior
-Where would you find the Sea of Tranquility? 
+Where would you find the Sea of Tranquility?
 The Moon
 What is someone who shoes horses called?
 A farrier
@@ -16,49 +13,49 @@ What kind of weapon is a falchion?
 A sword
 Which word goes before vest, beans and quartet?
 String
-What is another word for lexicon? 
+What is another word for lexicon?
 Dictionary
 Name the seventh planet from the sun.
 Uranus
-Who invented the rabies vaccination? 
+Who invented the rabies vaccination?
 Louis Pasteur
-
-Which is the only American state to begin with the letter 'p'? 
+catCountries
+Which is the only American state to begin with the letter 'p'?
 Pennsylvania
-Name the world's biggest island. 
+Name the world's biggest island.
 Greenland
-What is the world's longest river? 
+What is the world's longest river?
 Amazon
-Name the world's largest ocean. 
+Name the world's largest ocean.
 Pacific
-What is the diameter of Earth? 
+What is the diameter of Earth?
 8,000 miles
-Where would you find the world's most ancient forest? 
+Where would you find the world's most ancient forest?
 Daintree Forest north of Cairns, Australia
-Which four British cities have underground rail systems? 
+Which four British cities have underground rail systems?
 Liverpool, Glasgow, Newcastle and London
-What is the capital city of Spain? 
+What is the capital city of Spain?
 Madrid
-Which country is Prague in? 
+Which country is Prague in?
 Czech Republic
 Which English town was a forerunner of the Parks Movement and the first city in Europe to have a street tram system?
 Birken
-
-Name the actor who starred in 142 films including The Quiet Man, The Shootist, The Searchers and Stagecoach. 
+catMovies
+Name the actor who starred in 142 films including The Quiet Man, The Shootist, The Searchers and Stagecoach.
 John Wayne.
-Name the film noir actress who starred in I Married a Witch, The Glass Key, So Proudly We Hail! and Sullivan's Travels. 
+Name the film noir actress who starred in I Married a Witch, The Glass Key, So Proudly We Hail! and Sullivan's Travels.
 Veronica Lake.
 What is the oldest film ever made, and when was it made?
 Roundhay Garden Scene made in 1888.
-Which actress has won the most Oscars? 
+Which actress has won the most Oscars?
 Katharine Hepburn, with 4 Oscars and 12 nominations.
 Which actress said, "Fasten your seatbelts. It's going to be a bumpy night," in All About Eve?
 Bette Davis (as Margo Channing.)
-Name the director of the Lord of the Rings trilogy. 
+Name the director of the Lord of the Rings trilogy.
 Peter Jackson.
 Who played Neo in The Matrix? Keanu Reeves.
 Keanu Reeves.
-Name the actress whose career began at the age of 3, and who went on to star in films such as Contact, Maverick and The Silence of the Lambs? 
+Name the actress whose career began at the age of 3, and who went on to star in films such as Contact, Maverick and The Silence of the Lambs?
 Jodie Foster.
 Bray Studios, near Windsor in Berkshire, was home to which famous brand of horror films?
 Hammer Horror.

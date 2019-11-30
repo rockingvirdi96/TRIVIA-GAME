@@ -1,17 +1,16 @@
 package app;
 
 import java.util.Scanner;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * gamee
- */
 public class Game extends GameData {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
     short choiceOne = 0;
     boolean trial = true;
+    GameData gd = new GameData();
 
     public ArrayList<String> getQuestions() {
         return this.questions;
@@ -21,69 +20,100 @@ public class Game extends GameData {
         return this.answers;
     }
 
-    // Welcome to the Game.
-    public short selectCategory() {
-        createData();
+    public void clearData() {
+        this.answers.clear();
+        this.questions.clear();
+    }
+
+    public short selectCategory(GameData gd) throws IOException {
         boolean trial = true;
         while (trial) {
             Scanner input = new Scanner(System.in);
             short index = 0;
             trial = false;
             System.out.println("\nSelect the Category for the Quiz:-");
-            for (String x : getCategories()) {
+            for (String x : gd.getCategories()) {
                 System.out.println((index + 1) + "." + x);
                 index++;
             }
             try {
                 choiceOne = input.nextShort();
-                if (choiceOne < 1 || choiceOne > 3) {
-                    System.out.println("Wrong value only 3 options available.");
+                if (choiceOne < 1 || choiceOne > gd.getCategories().size()) {
+                    System.out.println("Wrong value only " + gd.getCategories().size() + " options available.");
                     trial = true;
                 }
             } catch (Exception e) {
-                System.out.println("Wrong option Selected.");
+                System.out.println("Wrong value entered.");
                 trial = true;
             }
         }
-        this.eraseData();
-        return choiceOne;
+        return (short) (choiceOne - 1);
     }
 
-    public void DivideQuestionAndAnswers(ArrayList<String> list) {
-        for (int i = 0; i < list.size(); i++) {
-            if (i % 2 == 0) {
-                this.questions.add(list.get(i));
-            } else {
-                this.answers.add(list.get(i));
+    public short selectCategory() throws IOException {
+        gd.updateData();
+        boolean trial = true;
+        while (trial) {
+            Scanner input;
+            short index = 0;
+            trial = false;
+            System.out.println("\nSelect the Category for the Quiz:-");
+            for (String x : gd.getCategories()) {
+                System.out.println((index + 1) + "." + x);
+                index++;
+            }
+            try {
+                input = new Scanner(System.in);
+                choiceOne = input.nextShort();
+                if (choiceOne < 1 || choiceOne > gd.getCategories().size()) {
+                    System.out.println("Wrong value.");
+                    trial = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Only digits please.");
+                trial = true;
             }
         }
+        return (short) (choiceOne - 1);
     }
 
-    public void DivideQandA(short choice) {
+    public void DivideQuestionAndAnswers(String Question, String Answer) {
+        this.questions.add(Question);
+        this.answers.add(Answer);
 
-        this.answers.clear();
-        this.questions.clear();
-        if (choice == 1) {
-            this.createData();
-            DivideQuestionAndAnswers(this.getIceBreakers());
-        }
-        if (choice == 2) {
-            this.createData();
-            DivideQuestionAndAnswers(this.getCountries());
-        }
-        if (choice == 3) {
-            this.createData();
-            DivideQuestionAndAnswers(this.getMovies());
-        }
     }
 
-    public void PlayQuestion() {
+    public void DivideQandA(GameData gd) throws IOException {
+        this.clearData();
+        this.updateData();
+        String answer = "";
+        String question = "";
+        short choice = this.selectCategory();
+        String SelectedCat = "cat" + gd.getCategories().get(choice);
+        for (String x : gd.getQuestionAnswers()) {
+            if (x.equals(SelectedCat)) {
+                for (int y = (gd.getQuestionAnswers().indexOf(x) + 1), index = 0; index < 10; y += 2, index++) {
+                    question = gd.getQuestionAnswers().get(y);
+                    answer = gd.getQuestionAnswers().get(y + 1);
+                    DivideQuestionAndAnswers(question, answer);
+                }
+            } else {
+                if (question != "") {
+                    break;
+                }
+            }
+        }
 
+    }
+
+    public void PlayQuestion(User u) {
+        u.resetScore();
+        float result = 0;
         for (int i = 0; i < this.questions.size(); i++) {
             String currentQuestion = this.questions.get(i);
             String answer = this.answers.get(i);
             short UserAnswer = 0;
-            User u = new User();
+
             ArrayList<String> options = new ArrayList<String>();
 
             System.out.println((i + 1) + ". " + currentQuestion);
@@ -124,8 +154,10 @@ public class Game extends GameData {
             } else {
                 System.out.println("Wrong Answer");
             }
-
+            result = u.getcorrectAnswer();
         }
+        System.out.println("Final Score: " + result / 10 * 100 + "%");
+
         this.eraseData();
 
     }

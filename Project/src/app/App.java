@@ -15,11 +15,11 @@ public class App {
         short choiceTwo = 0;
 
         // Main Program..
+        gd.createData();
         while (trial) {
 
             System.out.println("\n\n-- WELCOME TO TRIVIA --");
             System.out.println("=======================");
-
             Scanner input = new Scanner(System.in);
             trial = false;
             m.setSpecialCode("1234");
@@ -35,30 +35,34 @@ public class App {
                 }
                 if (choiceOne == 1) {
                     do {
-                        Scanner inputt = new Scanner(System.in);
+                        input = new Scanner(System.in);
                         trial = false;
-                        System.out.println("1.Login as the Manager.");
+                        System.out.println("\n1.Login as the Manager.");
                         System.out.println("2.Login as a Player.");
                         try {
-                            choiceTwo = inputt.nextShort();
+                            choiceTwo = input.nextShort();
                             if (choiceTwo == 1) {
-                                break;
-                                // do {
-                                // Scanner inputtt = new Scanner(System.in);
-                                // System.out.print("Enter the special 4 digit password:");
-                                // String spclPassword = inputtt.nextLine();
-                                // String spclCode = m.getSpecialCode();
-                                // if (spclPassword == spclCode) {
-                                // trial = false;
-                                // break;
-                                // } else {
-                                // trial = true;
-                                // }
-                                // } while (trial);
+                                do {
+                                    input = new Scanner(System.in);
+                                    System.out.print("Enter the special 4 digit password:");
+                                    String spclPassword = input.nextLine();
+                                    String spclCode = m.getSpecialCode();
+                                    if (spclCode.contains(spclPassword)) {
+                                        trial = false;
+                                        break;
+                                    } else {
+                                        System.out.println("Wrong Code.");
+                                        trial = true;
+                                    }
+                                } while (trial);
                             } else if (choiceTwo == 2) {
-                                u.Login();
-                                trial = false;
-                                break;
+
+                                if (u.Login()) {
+                                    break;
+                                } else {
+                                    u.Register();
+                                    trial = true;
+                                }
                             } else {
                                 System.out.println("Wrong choice mon ami.");
                                 trial = true;
@@ -69,16 +73,29 @@ public class App {
                         }
                     } while (trial);
                     if (choiceTwo == 1) {
-                        m.editQuestion();
-                        trial = false;
-                        break;
+                        System.out.println("\nSelect an option from the following: ");
+                        System.out.println("1.Edit a Question.");
+                        System.out.println("2.Add a new Category.");
+                        System.out.print("Enter choice:");
+                        Short choice = input.nextShort();
+                        switch (choice) {
+                        case 1: {
+                            m.editQuestion();
+                            break;
+                        }
+                        case 2: {
+                            m.addNewCategory();
+                            break;
+                        }
+                        }
+                        trial = true;
                     }
                     if (choiceTwo == 2) {
                         trial = true;
                         do {
-                            game.DivideQandA(game.selectCategory());
+                            game.DivideQandA(gd);
+                            game.PlayQuestion(u);
                             u.IncrementTimesPlayed();
-                            game.PlayQuestion();
                             System.out.print("Press Enter to play again or any key to go to main menu:");
                             input = new Scanner(System.in);
                             if (input.nextLine().equals("")) {
@@ -93,12 +110,12 @@ public class App {
                     u.Register();
                     trial = true;
                 } else if (choiceOne == 3) {
-                    u.DisplayResults();
+
                     System.out.println("Exiting Now......");
                     System.exit(0);
                 }
             } catch (Exception e) {
-                System.out.println("Only 1-3 choices available.Enter 1,2 or 3.");
+                System.out.println("Something Went Wrong");
                 trial = true;
             }
 

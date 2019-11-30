@@ -13,7 +13,7 @@ public class Manager {
     private ArrayList<String> usernames = new ArrayList<>();
     private ArrayList<String> passwords = new ArrayList<>();
     private ArrayList<String> email = new ArrayList<>();
-    private String specialCode;
+    private String specialCode = "1234";
     Game game = new Game();
     GameData gd = new GameData();
 
@@ -51,7 +51,7 @@ public class Manager {
         this.specialCode = specialCode;
     }
 
-    public void Login() {
+    public Boolean Login() {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter your username :");
         String usernameTemp = input.next();
@@ -59,72 +59,89 @@ public class Manager {
         String passTemp = input.next();
         if (usernames.size() == 0) {
             System.out.println("You are not registered.");
-            return;
+            return false;
         }
         for (var x = 0; x < usernames.size(); x++) {
             if (this.usernames.get(x).equals(usernameTemp) && this.passwords.get(x).equals(passTemp)) {
                 System.out.print("Welcome " + names.get(x));
-                return;
+                return true;
             }
         }
-        System.out.println(
-                "Information provided is not correct\nPress enter to try again or any key to go to main menu.");
-        input = new Scanner(System.in);
-        if (input.nextLine().equals("")) {
-            Login();
-        } else {
-            Register();
+        System.out.println("Information provided is not correct" + "\nPress Y to try again or N to Register.");
+        boolean trial = true;
+        while (trial) {
+            trial = false;
+            input = new Scanner(System.in);
+            String choice = input.next();
+            if ((char) choice.toUpperCase().charAt(0) == 'Y') {
+                Login();
+            } else if ((char) choice.toUpperCase().charAt(0) == 'N') {
+                Register();
+            } else {
+                trial = true;
+            }
         }
+        return true;
     }
 
-    public void function(ArrayList x) throws IOException {
+    public void addNewCategory() throws IOException {
         Scanner input;
         input = new Scanner(System.in);
-        for (short i = 0; i < x.size(); i++) {
-            System.out.println(x.get(i));
+        System.out.print("Enter the name of your category: ");
+        String name = input.nextLine();
+        gd.addData(name, "Categories.txt");
+        gd.addData("cat" + name, "questionAnswers.txt");
+        for (short x = 0; x < 10; x++) {
+            input = new Scanner(System.in);
+            System.out.print("Enter Question " + (x + 1) + ": ");
+            String question = input.nextLine();
+            gd.addData(question, "questionAnswers.txt");
+            System.out.print("Enter Answer " + (x + 1) + ": ");
+            String answer = input.nextLine();
+            gd.addData(answer, "questionAnswers.txt");
         }
-        System.out.print("Select which question you wish to edit.");
-        short qNo = input.nextShort();
-        input = new Scanner(System.in);
-        System.out.println("Enter the new question you want to replace it.");
-        String newQuestion = input.nextLine();
-        System.out.println((String) x.get(qNo - 1));
-        System.out.println("---" + newQuestion
-                + "\n this is what your new question will look like.\n Enter Y to save or N to edit.");
-        input = new Scanner(System.in);
-        char choix = input.nextLine().charAt(0);
-        if (choix == 'Y') {
-            gd.modifyData((String) x.get(qNo - 1), newQuestion);
-            return;
-        } else {
-            editQuestion();
-        }
+        gd.updateData();
     }
 
     public void editQuestion() throws IOException {
-        GameData gd = new GameData();
-        gd.createData();
-        short choice = game.selectCategory();
-        game.DivideQandA(choice);
-        switch (choice) {
-        case 1: {
-            function(game.getQuestions());
-            break;
+        ArrayList<String> QandA = new ArrayList<String>();
+        String file = "D:\\Sem_Troisieme\\JAVA\\TRIVIA-GAME\\Project\\src\\app\\questionAnswers.txt";
+        Scanner input;
+        input = new Scanner(System.in);
+        short i = 0;
+        String nextCat = "";
+        short choice = game.selectCategory(gd);
+        String SelectedCat = "cat" + gd.getCategories().get(choice);
+        String question = "";
+        String answer = "";
+        ArrayList<String> questions = new ArrayList<String>();
+        ArrayList<String> answers = new ArrayList<String>();
+        for (String x : gd.getQuestionAnswers()) {
+            if (x.equals(SelectedCat)) {
+                for (int y = (gd.getQuestionAnswers().indexOf(x) + 1), index = 0; index < 10; y += 2, index++) {
+                    question = gd.getQuestionAnswers().get(y);
+                    answer = gd.getQuestionAnswers().get(y + 1);
+                    questions.add(question);
+                    answers.add(answer);
+                    System.out.println((index + 1) + ". " + question);
+                }
+            } else {
+                if (question != "") {
+                    break;
+                }
+            }
         }
-        case 2: {
-            function(game.getQuestions());
-            break;
-        }
-        case 3: {
-            function(game.getQuestions());
-            break;
-        }
-        }
-
-    }
-
-    public void addNewCategory() {
-
+        input = new Scanner(System.in);
+        System.out.print("\nSelect which Question you wish to Edit: ");
+        int select = input.nextInt();
+        input = new Scanner(System.in);
+        System.out.print("\nEnter the new Question: ");
+        String NewQuestion = input.nextLine();
+        gd.modifyData((String) questions.get(select - 1), NewQuestion);
+        System.out.print("\nEnter the new Answer: ");
+        String NewAnswer = input.nextLine();
+        gd.modifyData((String) answers.get(select - 1), NewAnswer);
+        gd.updateData();
     }
 
 }
