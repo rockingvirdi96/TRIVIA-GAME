@@ -14,7 +14,7 @@ public class Manager {
     private ArrayList<String> passwords = new ArrayList<>();
     private ArrayList<String> email = new ArrayList<>();
     private String specialCode = "1234";
-    Game game = new Game();
+    GamePlay game = new GamePlay();
     GameData gd = new GameData();
 
     public void Register() {

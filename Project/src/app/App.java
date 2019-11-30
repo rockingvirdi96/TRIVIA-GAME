@@ -7,7 +7,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         Manager m = new Manager();
-        Game game = new Game();
+        GamePlay game = new GamePlay();
         User u = new User();
         GameData gd = new GameData();
         boolean trial = true;
@@ -22,7 +22,7 @@ public class App {
             System.out.println("=======================");
             Scanner input = new Scanner(System.in);
             trial = false;
-            m.setSpecialCode("1234");
+
             System.out.println("1.Login (If already registered)");
             System.out.println("2.Register to the game.");
             System.out.println("3.Exit.");
@@ -42,17 +42,23 @@ public class App {
                         try {
                             choiceTwo = input.nextShort();
                             if (choiceTwo == 1) {
+                                short i = 0;
                                 do {
                                     input = new Scanner(System.in);
                                     System.out.print("Enter the special 4 digit password:");
                                     String spclPassword = input.nextLine();
                                     String spclCode = m.getSpecialCode();
-                                    if (spclCode.contains(spclPassword)) {
+                                    if (spclCode.equals(spclPassword)) {
                                         trial = false;
                                         break;
                                     } else {
-                                        System.out.println("Wrong Code.");
+                                        i++;
+                                        System.out.println("Wrong Code." + (3 - i) + " attempts left.");
                                         trial = true;
+                                        if (i == 3) {
+                                            System.out.println("\nMultiple wrong attempts.");
+                                            break;
+                                        }
                                     }
                                 } while (trial);
                             } else if (choiceTwo == 2) {
@@ -64,11 +70,11 @@ public class App {
                                     trial = true;
                                 }
                             } else {
-                                System.out.println("Wrong choice mon ami.");
+                                System.out.println("Invalid Choice.");
                                 trial = true;
                             }
                         } catch (Exception e) {
-                            System.out.println("Only 2 choices available.Enter 1 or 2");
+                            System.out.println("Invalid Choice");
                             trial = true;
                         }
                     } while (trial);
@@ -76,7 +82,8 @@ public class App {
                         System.out.println("\nSelect an option from the following: ");
                         System.out.println("1.Edit a Question.");
                         System.out.println("2.Add a new Category.");
-                        System.out.print("Enter choice:");
+                        System.out.println("3.Change the Pass Code.");
+                        System.out.print("Enter choice: ");
                         Short choice = input.nextShort();
                         switch (choice) {
                         case 1: {
@@ -87,6 +94,12 @@ public class App {
                             m.addNewCategory();
                             break;
                         }
+                        case 3: {
+                            input = new Scanner(System.in);
+                            System.out.print("\nEnter the new code: ");
+                            String newCode = input.nextLine();
+                            m.setSpecialCode(newCode);
+                        }
                         }
                         trial = true;
                     }
@@ -94,8 +107,8 @@ public class App {
                         trial = true;
                         do {
                             gd.updateData();
-                            game.DivideQandA(gd);
-                            game.PlayQuestion(u);
+                            // game.DivideQandA(gd);
+                            u.PlayQuestion(u);
                             u.IncrementTimesPlayed();
                             System.out.print("Press Enter to play again or any key to go to main menu:");
                             input = new Scanner(System.in);

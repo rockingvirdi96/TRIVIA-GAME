@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Game extends GameData {
+public class GamePlay extends GameData {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
     short choiceOne = 0;
@@ -107,55 +107,56 @@ public class Game extends GameData {
 
     }
 
-    public void PlayQuestion(User u) {
-        u.resetScore();
-        float result = 0;
-        for (int i = 0; i < this.questions.size(); i++) {
-            String currentQuestion = this.questions.get(i);
-            String answer = this.answers.get(i);
-            short UserAnswer = 0;
+    // public void PlayQuestion(User u) {
+    // u.resetScore();
+    // float result = 0;
+    // for (int i = 0; i < this.questions.size(); i++) {
+    // String currentQuestion = this.questions.get(i);
+    // String answer = this.answers.get(i);
+    // short UserAnswer = 0;
 
-            ArrayList<String> options = new ArrayList<String>();
+    // ArrayList<String> options = new ArrayList<String>();
 
-            System.out.println((i + 1) + ". " + currentQuestion);
-            while (options.size() != 4) {
-                int random = ThreadLocalRandom.current().nextInt(0, 10);
+    // System.out.println((i + 1) + ". " + currentQuestion);
+    // while (options.size() != 4) {
+    // int random = ThreadLocalRandom.current().nextInt(0, 10);
 
-                if (!options.contains(this.answers.get(random)) && (this.answers.get(random) != answer)) {
-                    options.add(this.answers.get(random));
-                }
-            }
-            int random = ThreadLocalRandom.current().nextInt(0, 4);
-            options.set(random, answer);
-            for (String opt : options) {
-                System.out.println("-- " + opt);
-            }
-            trial = true;
-            while (trial) {
-                Scanner input = new Scanner(System.in);
-                try {
-                    System.out.print("Enter the correct answer(1-4):");
-                    UserAnswer = input.nextShort();
-                    if (UserAnswer < 1 || UserAnswer > 4) {
-                        System.out.println("Invalid input.");
-                        trial = true;
-                    } else {
-                        trial = false;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Invalid input.");
-                    trial = true;
-                }
-            }
-            if (UserAnswer == (random + 1)) {
-                System.out.println("Correct Answer");
-                u.IncrementCorrectAnswer();
-            } else {
-                System.out.println("Wrong Answer");
-            }
-            result = u.getcorrectAnswer();
-        }
-        System.out.println("Final Score: " + result / 10 * 100 + "%");
+    // if (!options.contains(this.answers.get(random)) && (this.answers.get(random)
+    // != answer)) {
+    // options.add(this.answers.get(random));
+    // }
+    // }
+    // int random = ThreadLocalRandom.current().nextInt(0, 4);
+    // options.set(random, answer);
+    // for (String opt : options) {
+    // System.out.println("-- " + opt);
+    // }
+    // trial = true;
+    // while (trial) {
+    // Scanner input = new Scanner(System.in);
+    // try {
+    // System.out.print("Enter the correct answer(1-4):");
+    // UserAnswer = input.nextShort();
+    // if (UserAnswer < 1 || UserAnswer > 4) {
+    // System.out.println("Invalid input.");
+    // trial = true;
+    // } else {
+    // trial = false;
+    // }
+    // } catch (Exception e) {
+    // System.out.println("Invalid input.");
+    // trial = true;
+    // }
+    // }
+    // if (UserAnswer == (random + 1)) {
+    // System.out.println("Correct Answer");
+    // u.IncrementCorrectAnswer();
+    // } else {
+    // System.out.println("Wrong Answer");
+    // }
+    // result = u.getcorrectAnswer();
+    // }
+    // System.out.println("Final Score: " + result / 10 * 100 + "%");
 
-    }
+    // }
 }
