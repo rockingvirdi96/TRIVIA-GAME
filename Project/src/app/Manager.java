@@ -7,12 +7,8 @@ import java.util.ArrayList;
 /**
  * User
  */
-public class Manager {
+public class Manager extends Person {
 
-    private ArrayList<String> names = new ArrayList<>();
-    private ArrayList<String> usernames = new ArrayList<>();
-    private ArrayList<String> passwords = new ArrayList<>();
-    private ArrayList<String> email = new ArrayList<>();
     private String specialCode = "1234";
     GamePlay game = new GamePlay();
     GameData gd = new GameData();
@@ -27,7 +23,7 @@ public class Manager {
             trial = false;
             System.out.print("Enter your username: ");
             username = input.nextLine();
-            if (this.usernames.contains(username)) {
+            if (this.getUsernames().contains(username)) {
                 System.out.println("This username already exists.Try a different one.");
                 trial = true;
             }
@@ -36,10 +32,10 @@ public class Manager {
         String password = input.nextLine();
         System.out.print("Enter your Email: ");
         String email = input.nextLine();
-        this.names.add(name);
-        this.usernames.add(username);
-        this.passwords.add(password);
-        this.email.add(email);
+        this.getNames().add(name);
+        this.getUsernames().add(username);
+        this.getPasswords().add(password);
+        this.getEmail().add(email);
         System.out.println("SUCCESS! You are registered.");
     }
 
@@ -57,13 +53,13 @@ public class Manager {
         String usernameTemp = input.next();
         System.out.print("Enter your password :");
         String passTemp = input.next();
-        if (usernames.size() == 0) {
+        if (this.getUsernames().size() == 0) {
             System.out.println("You are not registered.");
             return false;
         }
-        for (var x = 0; x < usernames.size(); x++) {
-            if (this.usernames.get(x).equals(usernameTemp) && this.passwords.get(x).equals(passTemp)) {
-                System.out.print("Welcome " + names.get(x));
+        for (var x = 0; x < getUsernames().size(); x++) {
+            if (getUsernames().get(x).equals(usernameTemp) && getPasswords().get(x).equals(passTemp)) {
+                System.out.print("Welcome " + getNames().get(x));
                 return true;
             }
         }
