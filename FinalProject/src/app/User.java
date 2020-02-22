@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * User
  */
-public class User extends Manager {
+public class User extends Person {
     private short timesPlayed = 0;
     private short correctAnswer = 0;
     GameData gd = new GameData();
